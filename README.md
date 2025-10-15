@@ -23,6 +23,12 @@ git clone git@github.com:PRodionovDev/CityService.git
 go run main.go
 ```
 
+## Docker
+
+```shell
+docker-compose up
+```
+
 Проект доступен по url:
 http://localhost:8080
 
