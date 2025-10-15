@@ -54,3 +54,12 @@ curl -X PUT http://localhost:8080/city/{id} -H "Content-Type: application/json" 
 ```shell
 curl -X DELETE http://localhost:8080/city/{id} -H "Content-Type: application/json"
 ```
+
+## ToDo
+1. расширить структуру города (координаты и тд)
+2. добавить регионы и АПИ к ним
+3. добавить сваггер
+4. русификация полная (или же наоборот)
+5. главная страница с рендером
+6. авторизация
+7. заполнение дампа
