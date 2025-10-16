@@ -31,41 +31,9 @@ http://localhost:8080
 
 ## API
 
-### City
-```shell
-curl -X GET http://localhost:8080/cities -H "Content-Type: application/json"
-```
-```shell
-curl -X GET http://localhost:8080/city/{id} -H "Content-Type: application/json"
-```
-```shell
-curl -X POST http://localhost:8080/city -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
-```
-```shell
-curl -X PUT http://localhost:8080/city/{id} -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
-```
-```shell
-curl -X DELETE http://localhost:8080/city/{id} -H "Content-Type: application/json"
-```
-### Regions
-```shell
-curl -X GET http://localhost:8080/regions -H "Content-Type: application/json"
-```
-```shell
-curl -X GET http://localhost:8080/region/{id} -H "Content-Type: application/json"
-```
-```shell
-curl -X POST http://localhost:8080/region -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
-```
-```shell
-curl -X PUT http://localhost:8080/region/{id} -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
-```
-```shell
-curl -X DELETE http://localhost:8080/region/{id} -H "Content-Type: application/json"
-```
+[OpenApi Yaml](https://github.com/PRodionovDev/CityService/blob/main/Doc/openapi.yaml)
 
 ## ToDo
 1. расширить структуру городов и регионов (координаты и тд)
-2. добавить сваггер
-3. авторизация
-4. заполнение дампа
+2. авторизация
+3. заполнение дампа
