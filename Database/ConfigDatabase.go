@@ -14,6 +14,8 @@ func InitDatabase() error {
 	if err != nil {
     	return err
 	}
+
+    DB.AutoMigrate(&Entity.Region{})
 	return DB.AutoMigrate(&Entity.City{})
 }
 

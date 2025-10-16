@@ -54,11 +54,30 @@ curl -X PUT http://localhost:8080/city/{id} -H "Content-Type: application/json" 
 ```shell
 curl -X DELETE http://localhost:8080/city/{id} -H "Content-Type: application/json"
 ```
+Получение всех регионов
+```shell
+curl -X GET http://localhost:8080/regions -H "Content-Type: application/json"
+```
+Получение региона по ID
+```shell
+curl -X GET http://localhost:8080/region/{id} -H "Content-Type: application/json"
+```
+Создание нового региона
+```shell
+curl -X POST http://localhost:8080/region -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
+```
+Редактирование региона по ID
+```shell
+curl -X PUT http://localhost:8080/region/{id} -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
+```
+Удаление региона по ID
+```shell
+curl -X DELETE http://localhost:8080/region/{id} -H "Content-Type: application/json"
+```
 
 ## ToDo
-1. расширить структуру города (координаты и тд)
-2. добавить регионы и АПИ к ним
-3. добавить сваггер
-4. русификация полная (или же наоборот)
-5. авторизация
-6. заполнение дампа
+1. расширить структуру городов и регионов (координаты и тд)
+2. добавить сваггер
+3. русификация полная (или же наоборот)
+4. авторизация
+5. заполнение дампа

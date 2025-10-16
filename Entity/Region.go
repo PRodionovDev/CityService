@@ -1,12 +1,8 @@
 package Entity
 
-type City struct {
+type Region struct {
 	ID int	`json:"id" gorm:"primaryKey;autoIncrement"`
 	Name string `json:"name"`
 	Slug string `json:"slug"`
-	//RegionID int `json:"region_id"`
-	//IsCapital bool `json:"is_capital"`
-	//Latitude
-	//Longitude
-	//
+	//Number int `json:"number"`
 }
