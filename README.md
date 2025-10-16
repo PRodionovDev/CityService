@@ -1,6 +1,6 @@
 # City Service
 
-## Discriptions
+## Descriptions
 
 Cities microservice with a Go stack (go 1.25.2, gin 1.11.0, gorm 1.31.0, sqlite)
 
