@@ -33,6 +33,39 @@ http://localhost:8080
 
 [OpenApi Yaml](https://github.com/PRodionovDev/CityService/blob/main/Doc/openapi.yaml)
 
+### City
+```shell
+curl -X GET http://localhost:8080/cities -H "Content-Type: application/json"
+```
+```shell
+curl -X GET http://localhost:8080/city/{id} -H "Content-Type: application/json"
+```
+```shell
+curl -X POST http://localhost:8080/city -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
+```
+```shell
+curl -X PUT http://localhost:8080/city/{id} -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
+```
+```shell
+curl -X DELETE http://localhost:8080/city/{id} -H "Content-Type: application/json"
+```
+### Regions
+```shell
+curl -X GET http://localhost:8080/regions -H "Content-Type: application/json"
+```
+```shell
+curl -X GET http://localhost:8080/region/{id} -H "Content-Type: application/json"
+```
+```shell
+curl -X POST http://localhost:8080/region -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
+```
+```shell
+curl -X PUT http://localhost:8080/region/{id} -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
+```
+```shell
+curl -X DELETE http://localhost:8080/region/{id} -H "Content-Type: application/json"
+```
+
 ## ToDo
 1. расширить структуру городов и регионов (координаты и тд)
 2. авторизация
