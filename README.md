@@ -1,12 +1,12 @@
 # City Service
 
-## Назначение
+## Discriptions
 
-Микросервис городов со стеком на Go (go 1.25.2, gin 1.11.0, gorm 1.31.0, sqlite)
+Cities microservice with a Go stack (go 1.25.2, gin 1.11.0, gorm 1.31.0, sqlite)
 
-## Развертывание
+## Deployment
 
-1. Клонируем репозиторий в директорию нового проекта
+Clone the repository into the new project directory
 
 ```shell
 mkdir city_service
@@ -14,63 +14,52 @@ cd city_service
 git clone git@github.com:PRodionovDev/CityService.git
 ```
 
-
-## Локальный запуск
-
-Запускаем инициализацию
+### Local
 
 ```shell
 go run main.go
 ```
 
-## Docker
+### Docker
 
 ```shell
 docker-compose up
 ```
 
-Проект доступен по url:
+### Url:
 http://localhost:8080
 
 ## API
 
-Получение всех городов
+### City
 ```shell
 curl -X GET http://localhost:8080/cities -H "Content-Type: application/json"
 ```
-Получение города по ID
 ```shell
 curl -X GET http://localhost:8080/city/{id} -H "Content-Type: application/json"
 ```
-Создание нового города
 ```shell
 curl -X POST http://localhost:8080/city -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
 ```
-Редактирование города по ID
 ```shell
 curl -X PUT http://localhost:8080/city/{id} -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
 ```
-Удаление города по ID
 ```shell
 curl -X DELETE http://localhost:8080/city/{id} -H "Content-Type: application/json"
 ```
-Получение всех регионов
+### Regions
 ```shell
 curl -X GET http://localhost:8080/regions -H "Content-Type: application/json"
 ```
-Получение региона по ID
 ```shell
 curl -X GET http://localhost:8080/region/{id} -H "Content-Type: application/json"
 ```
-Создание нового региона
 ```shell
 curl -X POST http://localhost:8080/region -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
 ```
-Редактирование региона по ID
 ```shell
 curl -X PUT http://localhost:8080/region/{id} -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
 ```
-Удаление региона по ID
 ```shell
 curl -X DELETE http://localhost:8080/region/{id} -H "Content-Type: application/json"
 ```
@@ -78,6 +67,5 @@ curl -X DELETE http://localhost:8080/region/{id} -H "Content-Type: application/j
 ## ToDo
 1. расширить структуру городов и регионов (координаты и тд)
 2. добавить сваггер
-3. русификация полная (или же наоборот)
-4. авторизация
-5. заполнение дампа
+3. авторизация
+4. заполнение дампа
