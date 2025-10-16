@@ -13,7 +13,9 @@ func main() {
 	}
 
 	router := gin.Default()
+	router.LoadHTMLFiles("View/index.html")
 
+    router.GET("/", Controller.Index)
 	router.GET("/cities", Controller.GetCities)
 	router.GET("/city/:id", Controller.GetCityByID)
 	router.POST("/city", Controller.CreateCity)
