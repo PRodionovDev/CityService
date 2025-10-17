@@ -35,38 +35,37 @@ http://localhost:8080
 
 ### City
 ```shell
-curl -X GET http://localhost:8080/cities -H "Content-Type: application/json"
+curl -X GET http://localhost:8080/cities -H "Content-Type: application/json" -H "Authorization: test"
 ```
 ```shell
-curl -X GET http://localhost:8080/city/{id} -H "Content-Type: application/json"
+curl -X GET http://localhost:8080/city/{id} -H "Content-Type: application/json" -H "Authorization: test"
 ```
 ```shell
-curl -X POST http://localhost:8080/city -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
+curl -X POST http://localhost:8080/city -H "Content-Type: application/json" -H "Authorization: test" -d '{"name":"Наименование","slug":"Slug"}'
 ```
 ```shell
-curl -X PUT http://localhost:8080/city/{id} -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
+curl -X PUT http://localhost:8080/city/{id} -H "Content-Type: application/json" -H "Authorization: test" -d '{"name":"Наименование","slug":"Slug"}'
 ```
 ```shell
-curl -X DELETE http://localhost:8080/city/{id} -H "Content-Type: application/json"
+curl -X DELETE http://localhost:8080/city/{id} -H "Content-Type: application/json" -H "Authorization: test"
 ```
 ### Regions
 ```shell
-curl -X GET http://localhost:8080/regions -H "Content-Type: application/json"
+curl -X GET http://localhost:8080/regions -H "Content-Type: application/json" -H "Authorization: test"
 ```
 ```shell
-curl -X GET http://localhost:8080/region/{id} -H "Content-Type: application/json"
+curl -X GET http://localhost:8080/region/{id} -H "Content-Type: application/json" -H "Authorization: test"
 ```
 ```shell
-curl -X POST http://localhost:8080/region -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
+curl -X POST http://localhost:8080/region -H "Content-Type: application/json" -H "Authorization: test" -d '{"name":"Наименование","slug":"Slug"}'
 ```
 ```shell
-curl -X PUT http://localhost:8080/region/{id} -H "Content-Type: application/json" -d '{"name":"Наименование","slug":"Slug"}'
+curl -X PUT http://localhost:8080/region/{id} -H "Content-Type: application/json" -H "Authorization: test" -d '{"name":"Наименование","slug":"Slug"}'
 ```
 ```shell
-curl -X DELETE http://localhost:8080/region/{id} -H "Content-Type: application/json"
+curl -X DELETE http://localhost:8080/region/{id} -H "Content-Type: application/json" -H "Authorization: test"
 ```
 
 ## ToDo
 1. расширить структуру городов и регионов (координаты и тд)
-2. авторизация
-3. заполнение дампа
+2. заполнение дампа

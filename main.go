@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"city-service/Controller"
 	"city-service/Database"
+	"city-service/Middleware"
 )
 
 func main() {
@@ -14,6 +15,7 @@ func main() {
 
 	router := gin.Default()
 	router.LoadHTMLFiles("View/index.html")
+	router.Use(Middleware.AuthMiddleware())
 
     router.GET("/", Controller.Index)
 	router.GET("/cities", Controller.GetCities)
