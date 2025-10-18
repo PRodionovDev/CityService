@@ -239,6 +239,9 @@ components:
         population:
           type: integer
           example: 13274285
+        updated:
+          type: string
+          example: "2025-10-18T13:29:11.579084+08:00"
     Region:
       required:
         - name
