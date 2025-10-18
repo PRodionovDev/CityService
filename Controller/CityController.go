@@ -39,7 +39,6 @@ func CreateCity(c *gin.Context) {
     	Longitude float64 `json:"longitude" binding:"required"`
     	TimeZone string `json:"time_zone" binding:"required"`
     	Population int `json:"population" binding:"required"`
-    	//Updated int `json:"updated" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -68,7 +67,6 @@ func UpdateCityByID(c *gin.Context) {
         	Longitude float64 `json:"longitude" binding:"required"`
         	TimeZone string `json:"time_zone" binding:"required"`
         	Population int `json:"population" binding:"required"`
-        	//Updated int `json:"updated" binding:"required"`
     	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
