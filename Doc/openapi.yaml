@@ -200,6 +200,12 @@ components:
       required:
         - name
         - slug
+        - region_id
+        - is_capital
+        - type
+        - latitude
+        - longitude
+        - population
       type: object
       properties:
         id:
@@ -212,6 +218,24 @@ components:
         slug:
           type: string
           example: moscow
+        region_id:
+          type: integer
+          example: 99
+        is_capital:
+          type: boolean
+          example: true
+        type:
+          type: string
+          example: Город
+        latitude:
+          type: number
+          example: 55.751244
+        longitude:
+          type: number
+          example: 37.618423
+        population:
+          type: integer
+          example: 13274285
     Region:
       required:
         - name

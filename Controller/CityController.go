@@ -32,14 +32,14 @@ func CreateCity(c *gin.Context) {
 	var input struct {
     	Name string `json:"name" binding:"required"`
     	Slug string `json:"slug" binding:"required"`
-    	//RegionID int `json:"number" binding:"required"`
-    	//IsCapital int `json:"number" binding:"required"`
-    	//Type int `json:"number" binding:"required"`
-    	//Latitude int `json:"number" binding:"required"`
-    	//Longitude int `json:"number" binding:"required"`
-    	//TimeZone int `json:"number" binding:"required"`
-    	//Population int `json:"number" binding:"required"`
-    	//Updated int `json:"number" binding:"required"`
+    	RegionID int `json:"region_id" binding:"required"`
+    	IsCapital bool `json:"is_capital" binding:"required"`
+    	Type string `json:"type" binding:"required"`
+    	Latitude float64 `json:"latitude" binding:"required"`
+    	Longitude float64 `json:"longitude" binding:"required"`
+    	//TimeZone int `json:"timezone" binding:"required"`
+    	Population int `json:"population" binding:"required"`
+    	//Updated int `json:"updated" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -47,7 +47,7 @@ func CreateCity(c *gin.Context) {
     	return
 	}
 
-	city := Repository.CreateCity(input.Name, input.Slug)
+	city := Repository.CreateCity(input.Name, input.Slug, input.RegionID, input.IsCapital, input.Type, input.Latitude, input.Longitude, input.Population)
 	c.JSON(http.StatusCreated, city)
 }
 
@@ -59,16 +59,24 @@ func UpdateCityByID(c *gin.Context) {
 	}
 
 	var input struct {
-    	Name string `json:"name" binding:"required"`
-    	Slug string `json:"slug" binding:"required"`
-	}
+        	Name string `json:"name" binding:"required"`
+        	Slug string `json:"slug" binding:"required"`
+        	RegionID int `json:"region_id" binding:"required"`
+        	IsCapital bool `json:"is_capital" binding:"required"`
+        	Type string `json:"type" binding:"required"`
+        	Latitude float64 `json:"latitude" binding:"required"`
+        	Longitude float64 `json:"longitude" binding:"required"`
+        	//TimeZone int `json:"timezone" binding:"required"`
+        	Population int `json:"population" binding:"required"`
+        	//Updated int `json:"updated" binding:"required"`
+    	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
     	c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
     	return
 	}
 
-	city := Repository.UpdateCity(id, input.Name, input.Slug)
+	city := Repository.UpdateCity(id, input.Name, input.Slug, input.RegionID, input.IsCapital, input.Type, input.Latitude, input.Longitude, input.Population)
 	if city == nil {
     	c.JSON(http.StatusNotFound, gin.H{"error": "City not found"})
     	return
