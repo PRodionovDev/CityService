@@ -216,6 +216,7 @@ components:
       required:
         - name
         - slug
+        - number
       type: object
       properties:
         id:
@@ -228,6 +229,9 @@ components:
         slug:
           type: string
           example: moscow republic
+        number:
+          type: integer
+          example: 99
   requestBodies:
     City:
       description: City object that needs to be added to the db

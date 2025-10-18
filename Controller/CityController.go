@@ -32,6 +32,14 @@ func CreateCity(c *gin.Context) {
 	var input struct {
     	Name string `json:"name" binding:"required"`
     	Slug string `json:"slug" binding:"required"`
+    	//RegionID int `json:"number" binding:"required"`
+    	//IsCapital int `json:"number" binding:"required"`
+    	//Type int `json:"number" binding:"required"`
+    	//Latitude int `json:"number" binding:"required"`
+    	//Longitude int `json:"number" binding:"required"`
+    	//TimeZone int `json:"number" binding:"required"`
+    	//Population int `json:"number" binding:"required"`
+    	//Updated int `json:"number" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {

@@ -57,10 +57,10 @@ curl -X GET http://localhost:8080/regions -H "Content-Type: application/json" -H
 curl -X GET http://localhost:8080/region/{id} -H "Content-Type: application/json" -H "Authorization: test"
 ```
 ```shell
-curl -X POST http://localhost:8080/region -H "Content-Type: application/json" -H "Authorization: test" -d '{"name":"Наименование","slug":"Slug"}'
+curl -X POST http://localhost:8080/region -H "Content-Type: application/json" -H "Authorization: test" -d '{"name":"Москва","slug":"Moscow","number":99}'
 ```
 ```shell
-curl -X PUT http://localhost:8080/region/{id} -H "Content-Type: application/json" -H "Authorization: test" -d '{"name":"Наименование","slug":"Slug"}'
+curl -X PUT http://localhost:8080/region/{id} -H "Content-Type: application/json" -H "Authorization: test" -d '{"name":"Москва","slug":"Moscow","number":99}'
 ```
 ```shell
 curl -X DELETE http://localhost:8080/region/{id} -H "Content-Type: application/json" -H "Authorization: test"

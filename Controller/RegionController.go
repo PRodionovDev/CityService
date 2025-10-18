@@ -32,6 +32,7 @@ func CreateRegion(c *gin.Context) {
 	var input struct {
     	Name string `json:"name" binding:"required"`
     	Slug string `json:"slug" binding:"required"`
+    	Number int `json:"number" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -39,7 +40,7 @@ func CreateRegion(c *gin.Context) {
     	return
 	}
 
-	region := Repository.CreateRegion(input.Name, input.Slug)
+	region := Repository.CreateRegion(input.Name, input.Slug, input.Number)
 	c.JSON(http.StatusCreated, region)
 }
 
@@ -53,6 +54,7 @@ func UpdateRegionByID(c *gin.Context) {
 	var input struct {
     	Name string `json:"name" binding:"required"`
     	Slug string `json:"slug" binding:"required"`
+    	Number int `json:"number" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -60,7 +62,7 @@ func UpdateRegionByID(c *gin.Context) {
     	return
 	}
 
-	region := Repository.UpdateRegion(id, input.Name, input.Slug)
+	region := Repository.UpdateRegion(id, input.Name, input.Slug, input.Number)
 	if region == nil {
     	c.JSON(http.StatusNotFound, gin.H{"error": "Region not found"})
     	return
