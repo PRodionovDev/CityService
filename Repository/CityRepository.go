@@ -19,7 +19,7 @@ func GetCityByID(id int) *Entity.City {
 	return &city
 }
 
-func CreateCity(name string, slug string, regionId int, isCapital bool, cityType string, latitude float64, longitude float64, population int) Entity.City {
+func CreateCity(name string, slug string, regionId int, isCapital bool, cityType string, latitude float64, longitude float64, timeZone string, population int) Entity.City {
 	city := Entity.City{
     	Name: name,
     	Slug: slug,
@@ -28,6 +28,7 @@ func CreateCity(name string, slug string, regionId int, isCapital bool, cityType
     	Type: cityType,
     	Latitude: latitude,
     	Longitude: longitude,
+    	TimeZone: timeZone,
     	Population: population,
 	}
 
@@ -35,7 +36,7 @@ func CreateCity(name string, slug string, regionId int, isCapital bool, cityType
 	return city
 }
 
-func UpdateCity(id int, name string, slug string, regionId int, isCapital bool, cityType string, latitude float64, longitude float64, population int) *Entity.City {
+func UpdateCity(id int, name string, slug string, regionId int, isCapital bool, cityType string, latitude float64, longitude float64, timeZone string, population int) *Entity.City {
 	var city Entity.City
     if result := Database.DB.First(&city, id); result.Error != nil {
     	return nil
@@ -47,6 +48,7 @@ func UpdateCity(id int, name string, slug string, regionId int, isCapital bool, 
 	city.Type = cityType
 	city.Latitude = latitude
 	city.Longitude = longitude
+	city.TimeZone = timeZone
 	city.Population = population
 
 	Database.DB.Updates(&city)

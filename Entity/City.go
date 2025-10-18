@@ -9,7 +9,7 @@ type City struct {
 	Type string `json:"type" gorm:"type:enum(\'Город\', \'Село\', \'пгт\', \'Деревня\')"`
 	Latitude float64 `json:"latitude"`
 	Longitude float64 `json:"longitude"`
-	//TimeZone
+	TimeZone string `json:"time_zone"`
 	Population int `json:"population"`
 	//Updated
 }

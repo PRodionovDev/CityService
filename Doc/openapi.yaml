@@ -233,6 +233,9 @@ components:
         longitude:
           type: number
           example: 37.618423
+        time_zone:
+          type: string
+          example: "Europe/Moscow"
         population:
           type: integer
           example: 13274285

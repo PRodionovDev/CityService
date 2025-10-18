@@ -37,7 +37,7 @@ func CreateCity(c *gin.Context) {
     	Type string `json:"type" binding:"required"`
     	Latitude float64 `json:"latitude" binding:"required"`
     	Longitude float64 `json:"longitude" binding:"required"`
-    	//TimeZone int `json:"timezone" binding:"required"`
+    	TimeZone string `json:"time_zone" binding:"required"`
     	Population int `json:"population" binding:"required"`
     	//Updated int `json:"updated" binding:"required"`
 	}
@@ -47,7 +47,7 @@ func CreateCity(c *gin.Context) {
     	return
 	}
 
-	city := Repository.CreateCity(input.Name, input.Slug, input.RegionID, input.IsCapital, input.Type, input.Latitude, input.Longitude, input.Population)
+	city := Repository.CreateCity(input.Name, input.Slug, input.RegionID, input.IsCapital, input.Type, input.Latitude, input.Longitude, input.TimeZone, input.Population)
 	c.JSON(http.StatusCreated, city)
 }
 
@@ -66,7 +66,7 @@ func UpdateCityByID(c *gin.Context) {
         	Type string `json:"type" binding:"required"`
         	Latitude float64 `json:"latitude" binding:"required"`
         	Longitude float64 `json:"longitude" binding:"required"`
-        	//TimeZone int `json:"timezone" binding:"required"`
+        	TimeZone string `json:"time_zone" binding:"required"`
         	Population int `json:"population" binding:"required"`
         	//Updated int `json:"updated" binding:"required"`
     	}
@@ -76,7 +76,7 @@ func UpdateCityByID(c *gin.Context) {
     	return
 	}
 
-	city := Repository.UpdateCity(id, input.Name, input.Slug, input.RegionID, input.IsCapital, input.Type, input.Latitude, input.Longitude, input.Population)
+	city := Repository.UpdateCity(id, input.Name, input.Slug, input.RegionID, input.IsCapital, input.Type, input.Latitude, input.Longitude, input.TimeZone, input.Population)
 	if city == nil {
     	c.JSON(http.StatusNotFound, gin.H{"error": "City not found"})
     	return
