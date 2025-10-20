@@ -8,7 +8,10 @@ import (
 )
 
 func GetCities(c *gin.Context) {
-	cities := Repository.GetAllCities()
+    regionId := c.Query("region_id")
+    name := c.Query("name")
+
+	cities := Repository.GetAllCities(name, regionId)
 	c.JSON(http.StatusOK, cities)
 }
 

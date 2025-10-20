@@ -5,9 +5,15 @@ import (
 	"city-service/Database"
 )
 
-func GetAllRegions() []Entity.Region {
+func GetAllRegions(name string) []Entity.Region {
 	var regions []Entity.Region
-	Database.DB.Find(&regions)
+	db := Database.DB.Model(&Entity.Region{})
+
+    if name != "" {
+        db.Where("name LIKE ?", "%" + name + "%")
+    }
+
+    db.Find(&regions)
 	return regions
 }
 

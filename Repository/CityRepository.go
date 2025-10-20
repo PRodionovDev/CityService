@@ -5,9 +5,27 @@ import (
 	"city-service/Database"
 )
 
-func GetAllCities() []Entity.City {
+/*func GetCityByName(name string) *Database.DB {
+  return Database.DB.Where("name LIKE %?%", name)
+}
+
+func GetCityByRegionId(regionId string) *Database.DB {
+  return Database.DB.Where("regionId = ?", regionId)
+}*/
+
+func GetAllCities(name string, regionId string) []Entity.City {
 	var cities []Entity.City
-	Database.DB.Find(&cities)
+	db := Database.DB.Model(&Entity.City{})
+
+	if regionId != "" {
+	    db.Where("region_id = ?", regionId)
+	}
+
+    if name != "" {
+        db.Where("name LIKE ?", "%" + name + "%")
+    }
+
+	db.Find(&cities)
 	return cities
 }
 

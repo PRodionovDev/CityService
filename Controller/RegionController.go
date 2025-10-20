@@ -8,7 +8,9 @@ import (
 )
 
 func GetRegions(c *gin.Context) {
-	regions := Repository.GetAllRegions()
+    name := c.Query("name")
+
+	regions := Repository.GetAllRegions(name)
 	c.JSON(http.StatusOK, regions)
 }
 

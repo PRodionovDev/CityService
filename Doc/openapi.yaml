@@ -23,6 +23,19 @@ paths:
       summary: Get all cities
       description: Get all cities
       operationId: getAllCity
+      parameters:
+        - name: region_id
+          in: query
+          description: Region ID
+          required: false
+          schema:
+            type: integer
+        - name: name
+          in: query
+          description: City name
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: Successful operation
@@ -112,6 +125,13 @@ paths:
       summary: Get all regions
       description: Get all regions
       operationId: getAllRegion
+      parameters:
+        - name: name
+          in: query
+          description: Region name
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: Successful operation

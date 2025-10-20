@@ -104,5 +104,3 @@ curl -X DELETE http://localhost:8080/region/{id} -H "Content-Type: application/j
 
 ## ToDo
 1. Fill the database
-2. Search city/region by Name methods
-3. Search cities by region id
