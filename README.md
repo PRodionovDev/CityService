@@ -101,3 +101,10 @@ curl -X PUT http://localhost:8080/region/{id} -H "Content-Type: application/json
 ```shell
 curl -X DELETE http://localhost:8080/region/{id} -H "Content-Type: application/json" -H "Authorization: test"
 ```
+
+### Sync
+Basic synchronization of cities and regions from CSV format to a database:
+
+```shell
+curl -X POST http://localhost:8080/sync -H "Content-Type: application/json" -H "Authorization: test"
+```
