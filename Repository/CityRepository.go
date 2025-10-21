@@ -5,14 +5,6 @@ import (
 	"city-service/Database"
 )
 
-/*func GetCityByName(name string) *Database.DB {
-  return Database.DB.Where("name LIKE %?%", name)
-}
-
-func GetCityByRegionId(regionId string) *Database.DB {
-  return Database.DB.Where("regionId = ?", regionId)
-}*/
-
 func GetAllCities(name string, regionId string) []Entity.City {
 	var cities []Entity.City
 	db := Database.DB.Model(&Entity.City{})

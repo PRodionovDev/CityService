@@ -12,7 +12,7 @@ import (
 
 func Sync(c *gin.Context) {
     ImportRegions()
-    //ImportCities()
+    ImportCities()
 }
 
 func ImportRegions() {
@@ -33,7 +33,29 @@ func ImportRegions() {
 
 func ImportCities() {
     cities := Import("Database/csv/cities.csv")
-    fmt.Println(cities)
+
+
+    for i := 0; i < len(cities); i++ {
+        city := cities[i]
+        region := Repository.GetAllRegions(city[4])
+        lat, err := strconv.ParseFloat(city[2], 64)
+        if err != nil {
+        	fmt.Println("Error converting string to float64:", err)
+        	return
+        }
+        long, err := strconv.ParseFloat(city[2], 64)
+        if err != nil {
+            fmt.Println("Error converting string to float64:", err)
+            return
+        }
+
+        // Not enough data, so:
+        // isCapital - default false
+        // cityType - default "Город"
+        // timezone - default ""
+        // timezone - default 0
+        Repository.CreateCity(city[0], city[1], region[0].ID, false, "Город", lat, long, "", 0)
+    }
 }
 
 func Import(filename string) [][]string {

@@ -101,6 +101,3 @@ curl -X PUT http://localhost:8080/region/{id} -H "Content-Type: application/json
 ```shell
 curl -X DELETE http://localhost:8080/region/{id} -H "Content-Type: application/json" -H "Authorization: test"
 ```
-
-## ToDo
-1. Fill the database
