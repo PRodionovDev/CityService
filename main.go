@@ -29,6 +29,7 @@ func main() {
     router.POST("/region", Controller.CreateRegion)
     router.PUT("/region/:id", Controller.UpdateRegionByID)
     router.DELETE("/region/:id", Controller.DeleteRegionByID)
+    router.POST("/sync", Controller.Sync)
 
 	router.Run(":8080")
 }
