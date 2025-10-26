@@ -1,16 +1,16 @@
-package Controller
+package handler
 
 import (
 	"net/http"
 	"strconv"
 	"github.com/gin-gonic/gin"
-	"city-service/Repository"
+	"city-service/internal/repository"
 )
 
 func GetRegions(c *gin.Context) {
     name := c.Query("name")
 
-	regions := Repository.GetAllRegions(name)
+	regions := repository.GetAllRegions(name)
 	c.JSON(http.StatusOK, regions)
 }
 
@@ -21,7 +21,7 @@ func GetRegionByID(c *gin.Context) {
     	return
 	}
 
-	region := Repository.GetRegionByID(id)
+	region := repository.GetRegionByID(id)
 	if region == nil {
     	c.JSON(http.StatusNotFound, gin.H{"error": "Region not found"})
     	return
@@ -32,9 +32,9 @@ func GetRegionByID(c *gin.Context) {
 
 func CreateRegion(c *gin.Context) {
 	var input struct {
-    	Name string `json:"name" binding:"required"`
-    	Slug string `json:"slug" binding:"required"`
-    	Number int `json:"number" binding:"required"`
+    	Name string     `json:"name" binding:"required"`
+    	Slug string     `json:"slug" binding:"required"`
+    	Number int      `json:"number" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -42,7 +42,7 @@ func CreateRegion(c *gin.Context) {
     	return
 	}
 
-	region := Repository.CreateRegion(input.Name, input.Slug, input.Number)
+	region := repository.CreateRegion(input.Name, input.Slug, input.Number)
 	c.JSON(http.StatusCreated, region)
 }
 
@@ -54,9 +54,9 @@ func UpdateRegionByID(c *gin.Context) {
 	}
 
 	var input struct {
-    	Name string `json:"name" binding:"required"`
-    	Slug string `json:"slug" binding:"required"`
-    	Number int `json:"number" binding:"required"`
+    	Name string     `json:"name" binding:"required"`
+    	Slug string     `json:"slug" binding:"required"`
+    	Number int      `json:"number" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -64,7 +64,7 @@ func UpdateRegionByID(c *gin.Context) {
     	return
 	}
 
-	region := Repository.UpdateRegion(id, input.Name, input.Slug, input.Number)
+	region := repository.UpdateRegion(id, input.Name, input.Slug, input.Number)
 	if region == nil {
     	c.JSON(http.StatusNotFound, gin.H{"error": "Region not found"})
     	return
@@ -79,7 +79,7 @@ func DeleteRegionByID(c *gin.Context) {
     	return
 	}
 
-	if success := Repository.DeleteRegionByID(id); !success {
+	if success := repository.DeleteRegionByID(id); !success {
     	c.JSON(http.StatusNotFound, gin.H{"error": "Region not found"})
     	return
 	}

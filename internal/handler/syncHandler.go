@@ -1,4 +1,4 @@
-package Controller
+package handler
 
 import (
 	"github.com/gin-gonic/gin"
@@ -6,7 +6,7 @@ import (
 	"encoding/csv"
     "fmt"
     "os"
-    "city-service/Repository"
+    "city-service/internal/repository"
     "strconv"
 )
 
@@ -16,7 +16,7 @@ func Sync(c *gin.Context) {
 }
 
 func ImportRegions() {
-    regions := Import("Database/csv/regions.csv")
+    regions := Import("pkg/database/csv/regions.csv")
 
     for i := 0; i < len(regions); i++ {
         region := regions[i]
@@ -27,17 +27,17 @@ func ImportRegions() {
         	fmt.Println("Error converting string to int:", err)
         	return
         }
-        Repository.CreateRegion(name, slug, number)
+        repository.CreateRegion(name, slug, number)
     }
 }
 
 func ImportCities() {
-    cities := Import("Database/csv/cities.csv")
+    cities := Import("pkg/database/csv/cities.csv")
 
 
     for i := 0; i < len(cities); i++ {
         city := cities[i]
-        region := Repository.GetAllRegions(city[4])
+        region := repository.GetAllRegions(city[4])
         lat, err := strconv.ParseFloat(city[2], 64)
         if err != nil {
         	fmt.Println("Error converting string to float64:", err)
@@ -54,7 +54,7 @@ func ImportCities() {
         // cityType - default "Город"
         // timezone - default ""
         // timezone - default 0
-        Repository.CreateCity(city[0], city[1], region[0].ID, false, "Город", lat, long, "", 0)
+        repository.CreateCity(city[0], city[1], region[0].ID, false, "Город", lat, long, "", 0)
     }
 }
 

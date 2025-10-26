@@ -31,7 +31,7 @@ go get github.com/joho/godotenv
 ```
 To run use:
 ```shell
-go run main.go
+ go run cmd/main.go
 ```
 
 ### Docker
