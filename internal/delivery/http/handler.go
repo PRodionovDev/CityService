@@ -6,18 +6,18 @@ import (
 )
 
 type Handler struct {
-    CityService     service.CityService
-    RegionService   service.RegionService
-    SiteService     service.SiteService
-    SyncService     service.SyncService
+    CityService   service.CityService
+    RegionService service.RegionService
+    SiteService   service.SiteService
+    SyncService   service.SyncService
 }
 
 func NewHandler(cityService service.CityService, regionService service.RegionService, siteService service.SiteService, syncService service.SyncService) *Handler {
     return &Handler{
-        CityService:    cityService,
-        RegionService:  regionService,
-        SiteService:    siteService,
-        SyncService:    syncService,
+        CityService:   cityService,
+        RegionService: regionService,
+        SiteService:   siteService,
+        SyncService:   syncService,
     }
 }
 

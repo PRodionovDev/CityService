@@ -40,9 +40,9 @@ func (s *RegionService) GetRegionByID(c *gin.Context) {
 
 func (s *RegionService) CreateRegion(c *gin.Context) {
 	var input struct {
-    	Name string     `json:"name" binding:"required"`
-    	Slug string     `json:"slug" binding:"required"`
-    	Number int      `json:"number" binding:"required"`
+    	Name string `json:"name" binding:"required"`
+    	Slug string `json:"slug" binding:"required"`
+    	Number int  `json:"number" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -62,9 +62,9 @@ func (s *RegionService) UpdateRegionByID(c *gin.Context) {
 	}
 
 	var input struct {
-    	Name string     `json:"name" binding:"required"`
-    	Slug string     `json:"slug" binding:"required"`
-    	Number int      `json:"number" binding:"required"`
+    	Name string `json:"name" binding:"required"`
+    	Slug string `json:"slug" binding:"required"`
+    	Number int  `json:"number" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {

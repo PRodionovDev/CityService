@@ -41,15 +41,15 @@ func (s *CityService) GetCityByID(c *gin.Context) {
 
 func (s *CityService) CreateCity(c *gin.Context) {
 	var input struct {
-    	Name string         `json:"name" binding:"required"`
-    	Slug string         `json:"slug" binding:"required"`
-    	RegionID int        `json:"region_id" binding:"required"`
-    	IsCapital bool      `json:"is_capital" binding:"required"`
-    	Type string         `json:"type" binding:"required"`
-    	Latitude float64    `json:"latitude" binding:"required"`
-    	Longitude float64   `json:"longitude" binding:"required"`
-    	TimeZone string     `json:"time_zone" binding:"required"`
-    	Population int      `json:"population" binding:"required"`
+    	Name string       `json:"name" binding:"required"`
+    	Slug string       `json:"slug" binding:"required"`
+    	RegionID int      `json:"region_id" binding:"required"`
+    	IsCapital bool    `json:"is_capital" binding:"required"`
+    	Type string       `json:"type" binding:"required"`
+    	Latitude float64  `json:"latitude" binding:"required"`
+    	Longitude float64 `json:"longitude" binding:"required"`
+    	TimeZone string   `json:"time_zone" binding:"required"`
+    	Population int    `json:"population" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -69,15 +69,15 @@ func (s *CityService) UpdateCityByID(c *gin.Context) {
 	}
 
 	var input struct {
-        	Name string         `json:"name" binding:"required"`
-        	Slug string         `json:"slug" binding:"required"`
-        	RegionID int        `json:"region_id" binding:"required"`
-        	IsCapital bool      `json:"is_capital" binding:"required"`
-        	Type string         `json:"type" binding:"required"`
-        	Latitude float64    `json:"latitude" binding:"required"`
-        	Longitude float64   `json:"longitude" binding:"required"`
-        	TimeZone string     `json:"time_zone" binding:"required"`
-        	Population int      `json:"population" binding:"required"`
+        	Name string       `json:"name" binding:"required"`
+        	Slug string       `json:"slug" binding:"required"`
+        	RegionID int      `json:"region_id" binding:"required"`
+        	IsCapital bool    `json:"is_capital" binding:"required"`
+        	Type string       `json:"type" binding:"required"`
+        	Latitude float64  `json:"latitude" binding:"required"`
+        	Longitude float64 `json:"longitude" binding:"required"`
+        	TimeZone string   `json:"time_zone" binding:"required"`
+        	Population int    `json:"population" binding:"required"`
     	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
