@@ -2,10 +2,11 @@ package main
 
 import (
 	"log"
-	"github.com/gin-gonic/gin"
-	"city-service/internal/handler"
+	"city-service/internal/delivery/http"
 	"city-service/pkg/database"
-	"city-service/pkg/middleware"
+	"city-service/internal/server"
+	"city-service/internal/repository"
+	"city-service/internal/service"
 )
 
 func main() {
@@ -13,23 +14,16 @@ func main() {
     	log.Fatalf("Failed to initialize database: %v", err)
 	}
 
-	router := gin.Default()
-	router.LoadHTMLFiles("internal/view/index.html")
+    repos := repository.NewRepositories(database.DB)
+    handlers := http.NewHandler(
+        service.NewCityService(repos.Cities),
+        service.NewRegionService(repos.Regions),
+        service.NewSiteService(),
+        service.NewSyncService(repos.Regions, repos.Cities),
+    )
 
-    router.GET("/", handler.Index)
-
-	router.Use(middleware.AuthMiddleware())
-	router.GET("/cities", handler.GetCities)
-	router.GET("/city/:id", handler.GetCityByID)
-	router.POST("/city", handler.CreateCity)
-	router.PUT("/city/:id", handler.UpdateCityByID)
-	router.DELETE("/city/:id", handler.DeleteCityByID)
-	router.GET("/regions", handler.GetRegions)
-    router.GET("/region/:id", handler.GetRegionByID)
-    router.POST("/region", handler.CreateRegion)
-    router.PUT("/region/:id", handler.UpdateRegionByID)
-    router.DELETE("/region/:id", handler.DeleteRegionByID)
-    router.POST("/sync", handler.Sync)
-
-	router.Run(":8080")
+	srv := new(server.Server)
+	if err := srv.Run("8080", handlers.InitRoutes()); err != nil {
+	    log.Fatalf("Failed to run http server: %e", err.Error())
+	}
 }

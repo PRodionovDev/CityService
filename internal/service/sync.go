@@ -1,4 +1,4 @@
-package handler
+package service
 
 import (
 	"github.com/gin-gonic/gin"
@@ -10,13 +10,17 @@ import (
     "strconv"
 )
 
-func Sync(c *gin.Context) {
-    ImportRegions()
-    ImportCities()
+type SyncService struct {
+    regionRepo repository.Regions
+    cityRepo   repository.Cities
 }
 
-func ImportRegions() {
-    regions := Import("pkg/database/csv/regions.csv")
+func NewSyncService(regionRepo repository.Regions, cityRepo repository.Cities) SyncService {
+    return SyncService{regionRepo: regionRepo, cityRepo: cityRepo}
+}
+
+func (s *SyncService) Sync(c *gin.Context) {
+    regions := importFile("pkg/database/csv/regions.csv")
 
     for i := 0; i < len(regions); i++ {
         region := regions[i]
@@ -27,17 +31,14 @@ func ImportRegions() {
         	fmt.Println("Error converting string to int:", err)
         	return
         }
-        repository.CreateRegion(name, slug, number)
+        s.regionRepo.CreateRegion(name, slug, number)
     }
-}
 
-func ImportCities() {
-    cities := Import("pkg/database/csv/cities.csv")
-
+    cities := importFile("pkg/database/csv/cities.csv")
 
     for i := 0; i < len(cities); i++ {
         city := cities[i]
-        region := repository.GetAllRegions(city[4])
+        region := s.regionRepo.GetAllRegions(city[4])
         lat, err := strconv.ParseFloat(city[2], 64)
         if err != nil {
         	fmt.Println("Error converting string to float64:", err)
@@ -54,11 +55,11 @@ func ImportCities() {
         // cityType - default "Город"
         // timezone - default ""
         // timezone - default 0
-        repository.CreateCity(city[0], city[1], region[0].ID, false, "Город", lat, long, "", 0)
+        s.cityRepo.CreateCity(city[0], city[1], region[0].ID, false, "Город", lat, long, "", 0)
     }
 }
 
-func Import(filename string) [][]string {
+func importFile(filename string) [][]string {
     var data [][]string
     file, err := os.Open(filename)
     if err != nil {

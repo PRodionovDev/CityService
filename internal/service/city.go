@@ -1,4 +1,4 @@
-package handler
+package service
 
 import (
 	"net/http"
@@ -7,22 +7,30 @@ import (
 	"city-service/internal/repository"
 )
 
-func GetCities(c *gin.Context) {
+type CityService struct {
+    repository repository.Cities
+}
+
+func NewCityService(repository repository.Cities) CityService {
+    return CityService{repository: repository}
+}
+
+func (s *CityService) GetCities(c *gin.Context) {
     regionId := c.Query("region_id")
     name := c.Query("name")
 
-	cities := repository.GetAllCities(name, regionId)
+	cities := s.repository.GetAllCities(name, regionId)
 	c.JSON(http.StatusOK, cities)
 }
 
-func GetCityByID(c *gin.Context) {
+func (s *CityService) GetCityByID(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
     	c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid city ID"})
     	return
 	}
 
-	city := repository.GetCityByID(id)
+	city := s.repository.GetCityByID(id)
 	if city == nil {
     	c.JSON(http.StatusNotFound, gin.H{"error": "City not found"})
     	return
@@ -31,7 +39,7 @@ func GetCityByID(c *gin.Context) {
 	c.JSON(http.StatusOK, city)
 }
 
-func CreateCity(c *gin.Context) {
+func (s *CityService) CreateCity(c *gin.Context) {
 	var input struct {
     	Name string         `json:"name" binding:"required"`
     	Slug string         `json:"slug" binding:"required"`
@@ -49,11 +57,11 @@ func CreateCity(c *gin.Context) {
     	return
 	}
 
-	city := repository.CreateCity(input.Name, input.Slug, input.RegionID, input.IsCapital, input.Type, input.Latitude, input.Longitude, input.TimeZone, input.Population)
+	city := s.repository.CreateCity(input.Name, input.Slug, input.RegionID, input.IsCapital, input.Type, input.Latitude, input.Longitude, input.TimeZone, input.Population)
 	c.JSON(http.StatusCreated, city)
 }
 
-func UpdateCityByID(c *gin.Context) {
+func (s *CityService) UpdateCityByID(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
     	c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid city ID"})
@@ -77,7 +85,7 @@ func UpdateCityByID(c *gin.Context) {
     	return
 	}
 
-	city := repository.UpdateCity(id, input.Name, input.Slug, input.RegionID, input.IsCapital, input.Type, input.Latitude, input.Longitude, input.TimeZone, input.Population)
+	city := s.repository.UpdateCity(id, input.Name, input.Slug, input.RegionID, input.IsCapital, input.Type, input.Latitude, input.Longitude, input.TimeZone, input.Population)
 	if city == nil {
     	c.JSON(http.StatusNotFound, gin.H{"error": "City not found"})
     	return
@@ -85,14 +93,14 @@ func UpdateCityByID(c *gin.Context) {
 	c.JSON(http.StatusOK, city)
 }
 
-func DeleteCityByID(c *gin.Context) {
+func (s *CityService) DeleteCityByID(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
     	c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid city ID"})
     	return
 	}
 
-	if success := repository.DeleteCityByID(id); !success {
+	if success := s.repository.DeleteCityByID(id); !success {
     	c.JSON(http.StatusNotFound, gin.H{"error": "City not found"})
     	return
 	}

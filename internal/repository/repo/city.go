@@ -1,11 +1,20 @@
-package repository
+package repo
 
 import (
+    "gorm.io/gorm"
 	"city-service/internal/domain"
 	"city-service/pkg/database"
 )
 
-func GetAllCities(name string, regionId string) []domain.City {
+type CityRepository struct {
+    db *gorm.DB
+}
+
+func NewCityRepository(db *gorm.DB) *CityRepository {
+    return &CityRepository{db: db}
+}
+
+func (r *CityRepository) GetAllCities(name string, regionId string) []domain.City {
 	var cities []domain.City
 	db := database.DB.Model(&domain.City{})
 
@@ -21,7 +30,7 @@ func GetAllCities(name string, regionId string) []domain.City {
 	return cities
 }
 
-func GetCityByID(id int) *domain.City {
+func (r *CityRepository) GetCityByID(id int) *domain.City {
 	var city domain.City
 	if result := database.DB.First(&city, id); result.Error != nil {
     	return nil
@@ -29,7 +38,7 @@ func GetCityByID(id int) *domain.City {
 	return &city
 }
 
-func CreateCity(name string, slug string, regionId int, isCapital bool, cityType string, latitude float64, longitude float64, timeZone string, population int) domain.City {
+func (r *CityRepository) CreateCity(name string, slug string, regionId int, isCapital bool, cityType string, latitude float64, longitude float64, timeZone string, population int) domain.City {
 	city := domain.City{
     	Name: name,
     	Slug: slug,
@@ -46,7 +55,7 @@ func CreateCity(name string, slug string, regionId int, isCapital bool, cityType
 	return city
 }
 
-func UpdateCity(id int, name string, slug string, regionId int, isCapital bool, cityType string, latitude float64, longitude float64, timeZone string, population int) *domain.City {
+func (r *CityRepository) UpdateCity(id int, name string, slug string, regionId int, isCapital bool, cityType string, latitude float64, longitude float64, timeZone string, population int) *domain.City {
 	var city domain.City
     if result := database.DB.First(&city, id); result.Error != nil {
     	return nil
@@ -65,7 +74,7 @@ func UpdateCity(id int, name string, slug string, regionId int, isCapital bool, 
 	return &city
 }
 
-func DeleteCityByID(id int) bool {
+func (r *CityRepository) DeleteCityByID(id int) bool {
 	if result := database.DB.Delete(&domain.City{}, id); result.Error != nil {
     	return false
 	}

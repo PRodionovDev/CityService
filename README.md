@@ -45,7 +45,7 @@ The project is available at the URL: http://localhost:8080
 
 ## API
 
-The API description in OpenApi format is available at the following link: [click here](https://github.com/PRodionovDev/CityService/blob/main/Doc/openapi.yaml)
+The API description in OpenApi format is available at the following link: [click here](https://github.com/PRodionovDev/CityService/blob/main/doc/openapi.yaml)
 
 ### City
 Basic CRUD for cities:

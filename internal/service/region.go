@@ -1,4 +1,4 @@
-package handler
+package service
 
 import (
 	"net/http"
@@ -7,21 +7,29 @@ import (
 	"city-service/internal/repository"
 )
 
-func GetRegions(c *gin.Context) {
+type RegionService struct {
+    repository repository.Regions
+}
+
+func NewRegionService(repository repository.Regions) RegionService {
+    return RegionService{repository: repository}
+}
+
+func (s *RegionService) GetRegions(c *gin.Context) {
     name := c.Query("name")
 
-	regions := repository.GetAllRegions(name)
+	regions := s.repository.GetAllRegions(name)
 	c.JSON(http.StatusOK, regions)
 }
 
-func GetRegionByID(c *gin.Context) {
+func (s *RegionService) GetRegionByID(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
     	c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid region ID"})
     	return
 	}
 
-	region := repository.GetRegionByID(id)
+	region := s.repository.GetRegionByID(id)
 	if region == nil {
     	c.JSON(http.StatusNotFound, gin.H{"error": "Region not found"})
     	return
@@ -30,7 +38,7 @@ func GetRegionByID(c *gin.Context) {
 	c.JSON(http.StatusOK, region)
 }
 
-func CreateRegion(c *gin.Context) {
+func (s *RegionService) CreateRegion(c *gin.Context) {
 	var input struct {
     	Name string     `json:"name" binding:"required"`
     	Slug string     `json:"slug" binding:"required"`
@@ -42,11 +50,11 @@ func CreateRegion(c *gin.Context) {
     	return
 	}
 
-	region := repository.CreateRegion(input.Name, input.Slug, input.Number)
+	region := s.repository.CreateRegion(input.Name, input.Slug, input.Number)
 	c.JSON(http.StatusCreated, region)
 }
 
-func UpdateRegionByID(c *gin.Context) {
+func (s *RegionService) UpdateRegionByID(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
     	c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid region ID"})
@@ -64,7 +72,7 @@ func UpdateRegionByID(c *gin.Context) {
     	return
 	}
 
-	region := repository.UpdateRegion(id, input.Name, input.Slug, input.Number)
+	region := s.repository.UpdateRegion(id, input.Name, input.Slug, input.Number)
 	if region == nil {
     	c.JSON(http.StatusNotFound, gin.H{"error": "Region not found"})
     	return
@@ -72,14 +80,14 @@ func UpdateRegionByID(c *gin.Context) {
 	c.JSON(http.StatusOK, region)
 }
 
-func DeleteRegionByID(c *gin.Context) {
+func (s *RegionService) DeleteRegionByID(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
     	c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid region ID"})
     	return
 	}
 
-	if success := repository.DeleteRegionByID(id); !success {
+	if success := s.repository.DeleteRegionByID(id); !success {
     	c.JSON(http.StatusNotFound, gin.H{"error": "Region not found"})
     	return
 	}

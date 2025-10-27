@@ -8,6 +8,6 @@ RUN go get -u gorm.io/driver/sqlite
 RUN go get github.com/joho/godotenv
 RUN go get github.com/gosimple/slug
 COPY . .
-RUN go build -o cmd/main .
+RUN go run cmd/main.go
 EXPOSE 8080
 CMD ["./main"]

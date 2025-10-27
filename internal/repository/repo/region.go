@@ -1,11 +1,20 @@
-package repository
+package repo
 
 import (
+    "gorm.io/gorm"
 	"city-service/internal/domain"
 	"city-service/pkg/database"
 )
 
-func GetAllRegions(name string) []domain.Region {
+type RegionRepository struct {
+    db *gorm.DB
+}
+
+func NewRegionRepository(db *gorm.DB) *RegionRepository {
+    return &RegionRepository {db: db}
+}
+
+func (r *RegionRepository) GetAllRegions(name string) []domain.Region {
 	var regions []domain.Region
 	db := database.DB.Model(&domain.Region{})
 
@@ -17,7 +26,7 @@ func GetAllRegions(name string) []domain.Region {
 	return regions
 }
 
-func GetRegionByID(id int) *domain.Region {
+func (r *RegionRepository) GetRegionByID(id int) *domain.Region {
 	var region domain.Region
 	if result := database.DB.First(&region, id); result.Error != nil {
     	return nil
@@ -25,7 +34,7 @@ func GetRegionByID(id int) *domain.Region {
 	return &region
 }
 
-func CreateRegion(name string, slug string, number int) domain.Region {
+func (r *RegionRepository) CreateRegion(name string, slug string, number int) domain.Region {
 	region := domain.Region{
     	Name: name,
     	Slug: slug,
@@ -36,7 +45,7 @@ func CreateRegion(name string, slug string, number int) domain.Region {
 	return region
 }
 
-func UpdateRegion(id int, name string, slug string, number int) *domain.Region {
+func (r *RegionRepository) UpdateRegion(id int, name string, slug string, number int) *domain.Region {
 	var region domain.Region
     if result := database.DB.First(&region, id); result.Error != nil {
     	return nil
@@ -49,7 +58,7 @@ func UpdateRegion(id int, name string, slug string, number int) *domain.Region {
 	return &region
 }
 
-func DeleteRegionByID(id int) bool {
+func (r *RegionRepository) DeleteRegionByID(id int) bool {
 	if result := database.DB.Delete(&domain.Region{}, id); result.Error != nil {
     	return false
 	}
