@@ -6,6 +6,8 @@ Cities microservice with a Go stack (go 1.25.2, gin 1.11.0, gorm 1.31.0, sqlite)
 
 The service provides an API to the library of cities of the Russian Federation.
 
+The project architecture is based on https://github.com/golang-standards/project-layout
+
 ## Installation
 
 Clone the repository into the new project directory

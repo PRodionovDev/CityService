@@ -23,7 +23,7 @@ func NewHandler(cityService service.CityService, regionService service.RegionSer
 
 func (h *Handler) InitRoutes() *gin.Engine {
     router := gin.New()
-    router.LoadHTMLFiles("internal/view/index.html")
+    router.LoadHTMLFiles("web/index.html")
 
     router.GET("/", h.SiteService.Index)
 
