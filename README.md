@@ -117,3 +117,11 @@ curl -X POST http://localhost:8080/sync -H "Content-Type: application/json" -H "
 go clean -testcache
 go test ./test
 ```
+
+## Roadmap
+1. config file
+2. token in .env
+3. post, put and delete test
+4. unit test
+5. make file
+6. russian readme in other file
