@@ -110,3 +110,10 @@ Basic synchronization of cities and regions from CSV format to a database:
 ```shell
 curl -X POST http://localhost:8080/sync -H "Content-Type: application/json" -H "Authorization: test"
 ```
+
+## Test
+
+```shell
+go clean -testcache
+go test ./test
+```
