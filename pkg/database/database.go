@@ -8,9 +8,14 @@ import (
 
 var DB *gorm.DB
 
-func InitDatabase() error {
+func InitDatabase(environment string) error {
+    name := "cities.db"
+    if environment == "test" {
+        name = "cities_test.db"
+    }
+
 	var err error
-	DB, err = gorm.Open(sqlite.Open("pkg/database/dump/cities.db"), &gorm.Config{})
+	DB, err = gorm.Open(sqlite.Open("pkg/database/dump/" + name), &gorm.Config{})
 	if err != nil {
     	return err
 	}

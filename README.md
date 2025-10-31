@@ -121,7 +121,6 @@ go test ./test
 ## Roadmap
 1. config file
 2. token in .env
-3. post, put and delete test
-4. unit test
-5. make file
-6. russian readme in other file
+3. unit test
+4. make file
+5. russian readme in other file
