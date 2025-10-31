@@ -3,7 +3,9 @@
 ## Описание
 
 Микросервис город на Golang (go 1.25.2, gin 1.11.0, gorm 1.31.0, sqlite)
+
 Сервис предоставляет API к библиотеке городов Российской Федерации.
+
 Архитектура проекта основана на https://github.com/golang-standards/project-layout/blob/master/README_ru.md
 
 ## Установка
