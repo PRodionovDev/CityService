@@ -114,12 +114,12 @@ curl -X POST http://localhost:8080/sync -H "Content-Type: application/json" -H "
 ## Автотесты
 
 ```shell
-go run cmd/main.go --stand=test #
+go run cmd/main.go --stand=test #запускаем приложение в тестовом окружении
 ```
 ```shell
-go clean -testcache #clean cache
-go test ./test #run tests
+go clean -testcache #очищаем кэш
+go test ./test #прогоняем тесты
 ```
 ```shell
-rm -rf pkg/database/dump/cities_test.db #delete the test database dump
+rm -rf pkg/database/dump/cities_test.db #удаляем тестовый дамп базы данных
 ```
