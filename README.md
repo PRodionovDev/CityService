@@ -1,5 +1,7 @@
 # City Service
+
 [🇬🇧 English version](README.md) | [🇷🇺 Русская версия](README_ru.md)
+
 ## Description
 
 Cities microservice with a Go stack (go 1.25.2, gin 1.11.0, gorm 1.31.0, sqlite)
@@ -8,19 +10,11 @@ The service provides an API to the library of cities of the Russian Federation.
 
 The project architecture is based on https://github.com/golang-standards/project-layout
 
-## Installation
-
-Clone the repository into the new project directory
-
-```shell
-mkdir city_service
-cd city_service
-git clone git@github.com:PRodionovDev/CityService.git
-```
-
 ## Deployment
 
-Deployment is possible in two ways: locally (with Golang installed on the server) or using a Docker app
+There are two ways to deploy a project:
+1. Locally (with Golang installed on the server)
+2. Using the Docker-compose utility.
 
 ### Local
 
@@ -31,7 +25,7 @@ go get -u gorm.io/gorm
 go get -u gorm.io/driver/sqlite
 go get github.com/joho/godotenv
 ```
-To run use:
+To run the application use the following command:
 ```shell
  go run cmd/main.go
 ```
@@ -42,12 +36,39 @@ The Docker container must be launched from the project root using the command:
 docker-compose up
 ```
 
-## Url:
 The project is available at the URL: http://localhost:8080
+
+## Makefile
+A makefile is a file containing a set of instructions used by the make utility in the build automation toolchain.
+
+In a project, the makefile contains the following commands:
+
+1. for local use:
+```shell
+init_go # project initialization (building configs and launching)
+run # running app
+stop # Stopping the project by killing the process that is using port 8080
+tests # Running integration tests (launching the application with the test environment, resetting the cache, running tests, shutting down the application, and deleting the test database)
+```
+
+2. for use with Docker:
+```shell
+init # project initialization (building configs and launching)
+up # up Docker container
+down # stop Docker container
+```
+
+3. And also the general command:
+```shell
+update-configs # Building configs (currently moving files from .env.example to .env)
+```
 
 ## API
 
 The API description in OpenApi format is available at the following link: [click here](https://github.com/PRodionovDev/CityService/blob/main/doc/openapi.yaml)
+
+The API provides basic CRUD for cities and regions, as well as a method for synchronizing the database from a CVS file.
+The API description in OpenApi format for Swagger is available at the following link: [ссылка](https://github.com/PRodionovDev/CityService/blob/main/doc/openapi.yaml)
 
 ### Cities
 Basic CRUD for cities:
@@ -113,6 +134,10 @@ curl -X POST http://localhost:8080/sync -H "Content-Type: application/json" -H "
 
 ## Test
 
+Automated tests are implemented as integration tests that check API requests with an empty test database.
+
+To run automated tests, use the following algorithm:
+
 ```shell
 go run cmd/main.go --stand=test #launch the application with a test environment
 ```
@@ -123,7 +148,3 @@ go test ./test #run tests
 ```shell
 rm -rf pkg/database/dump/cities_test.db #delete the test database dump
 ```
-
-## Roadmap
-1. config file
-2. unit test
