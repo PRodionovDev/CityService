@@ -1,7 +1,6 @@
 package test
 
 import (
-    "fmt"
     "bytes"
     "encoding/json"
     "net/http"
@@ -59,7 +58,6 @@ func TestWithDatabase(t *testing.T) {
 
     for _, test := range tests {
         jsonData, err := json.Marshal(test.params)
-        fmt.Println(string(jsonData))
         body := bytes.NewBuffer(jsonData)
         req, err := http.NewRequest(test.method, "http://localhost:8080" + test.url, body)
         if err != nil {
