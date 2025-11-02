@@ -148,3 +148,9 @@ go test ./test #run tests
 ```shell
 rm -rf pkg/database/dump/cities_test.db #delete the test database dump
 ```
+
+### Roadmap
+
+1. PostgreSQL Docker
+2. Connect to Docker PostgreSQL
+3. Autotest with Docker
