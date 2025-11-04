@@ -16,9 +16,34 @@ There are two ways to deploy a project:
 1. Locally (with Golang installed on the server)
 2. Using the Docker-compose utility.
 
+### Makefile
+A makefile is a file containing a set of instructions used by the make utility in the build automation toolchain.
+
+In a project, the makefile contains the following commands:
+
+```shell
+init # Building configs (currently moving files from .env.example to .env)
+up # up Docker container
+down # stop Docker container
+```
+
+Сборка проекта начинается с конфигурации. Нужно скопировать файл конфигурации в .env командой:
+```shell
+make init
+```
+И заполнить файл .env
+```dotenv
+API_TOKEN= #auth token
+DATABASE_HOST=
+DATABASE_USER=
+DATABASE_PASS=
+DATABASE_NAME=
+DATABASE_PORT=
+```
+
 ### Local
 
-You need to install Golang version 1.25.2 and the following packages:
+You need to install PostgreSQL 16, Golang version 1.25.2 and the following packages:
 ```shell
 go get -u github.com/gin-gonic/gin
 go get -u gorm.io/gorm
@@ -33,28 +58,16 @@ To run the application use the following command:
 ### Docker
 The Docker container must be launched from the project root using the command:
 ```shell
-docker-compose up
+make up
 ```
 
 The project is available at the URL: http://localhost:8080
 
-## Makefile
-A makefile is a file containing a set of instructions used by the make utility in the build automation toolchain.
-
-In a project, the makefile contains the following commands:
-
-```shell
-init # Building configs (currently moving files from .env.example to .env)
-up # up Docker container
-down # stop Docker container
-```
-
 ## API
 
-The API description in OpenApi format is available at the following link: [click here](https://github.com/PRodionovDev/CityService/blob/main/doc/openapi.yaml)
-
 The API provides basic CRUD for cities and regions, as well as a method for synchronizing the database from a CVS file.
-The API description in OpenApi format for Swagger is available at the following link: [ссылка](https://github.com/PRodionovDev/CityService/blob/main/doc/openapi.yaml)
+
+The API description in OpenApi format for Swagger is available at the following link: [click here](https://github.com/PRodionovDev/CityService/blob/main/doc/openapi.yaml)
 
 ### Cities
 Basic CRUD for cities:
