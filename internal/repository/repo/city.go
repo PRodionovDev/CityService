@@ -26,13 +26,13 @@ func (r *CityRepository) GetAllCities(name string, regionId string) []domain.Cit
         db.Where("name LIKE ?", "%" + name + "%")
     }
 
-	db.Find(&cities)
+	db.Preload("Region").Find(&cities)
 	return cities
 }
 
 func (r *CityRepository) GetCityByID(id int) *domain.City {
 	var city domain.City
-	if result := database.DB.First(&city, id); result.Error != nil {
+	if result := database.DB.Preload("Region").First(&city, id); result.Error != nil {
     	return nil
 	}
 	return &city

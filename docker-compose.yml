@@ -6,3 +6,16 @@ services:
       dockerfile: ./docker/Dockerfile
     ports:
       - "8080:8080"
+    depends_on:
+      - db
+  db:
+    image: postgres:16
+    container_name: database
+    environment:
+      POSTGRES_DB: cities
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:

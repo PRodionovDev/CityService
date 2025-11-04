@@ -1,7 +1,6 @@
 package app
 
 import (
-	"flag"
 	"log"
 	"city-service/internal/delivery/http"
 	"city-service/internal/server"
@@ -11,10 +10,7 @@ import (
 )
 
 func Run() {
-    environment := flag.String("stand", "prod", "environment")
-    flag.Parse()
-
-    if err := database.InitDatabase(*environment); err != nil {
+    if err := database.InitDatabase(); err != nil {
     	log.Fatalf("Failed to initialize database: %v", err)
 	}
 

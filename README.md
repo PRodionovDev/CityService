@@ -4,7 +4,7 @@
 
 ## Description
 
-Cities microservice with a Go stack (go 1.25.2, gin 1.11.0, gorm 1.31.0, sqlite)
+Cities microservice with a Go stack (go 1.25.2, gin 1.11.0, gorm 1.31.0, postgres 16)
 
 The service provides an API to the library of cities of the Russian Federation.
 
@@ -22,7 +22,7 @@ You need to install Golang version 1.25.2 and the following packages:
 ```shell
 go get -u github.com/gin-gonic/gin
 go get -u gorm.io/gorm
-go get -u gorm.io/driver/sqlite
+go get -u gorm.io/driver/postgres
 go get github.com/joho/godotenv
 ```
 To run the application use the following command:
@@ -43,24 +43,10 @@ A makefile is a file containing a set of instructions used by the make utility i
 
 In a project, the makefile contains the following commands:
 
-1. for local use:
 ```shell
-init_go # project initialization (building configs and launching)
-run # running app
-stop # Stopping the project by killing the process that is using port 8080
-tests # Running integration tests (launching the application with the test environment, resetting the cache, running tests, shutting down the application, and deleting the test database)
-```
-
-2. for use with Docker:
-```shell
-init # project initialization (building configs and launching)
+init # Building configs (currently moving files from .env.example to .env)
 up # up Docker container
 down # stop Docker container
-```
-
-3. And also the general command:
-```shell
-update-configs # Building configs (currently moving files from .env.example to .env)
 ```
 
 ## API
@@ -134,23 +120,8 @@ curl -X POST http://localhost:8080/sync -H "Content-Type: application/json" -H "
 
 ## Test
 
-Automated tests are implemented as integration tests that check API requests with an empty test database.
-
-To run automated tests, use the following algorithm:
-
-```shell
-go run cmd/main.go --stand=test #launch the application with a test environment
-```
-```shell
-go clean -testcache #clean cache
-go test ./test #run tests
-```
-```shell
-rm -rf pkg/database/dump/cities_test.db #delete the test database dump
-```
+IN PROGRESS
 
 ### Roadmap
 
-1. PostgreSQL Docker
-2. Connect to Docker PostgreSQL
-3. Autotest with Docker
+1. Autotest with Docker
