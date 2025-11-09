@@ -134,7 +134,3 @@ curl -X POST http://localhost:8080/sync -H "Content-Type: application/json" -H "
 ## Test
 
 IN PROGRESS
-
-### Roadmap
-
-1. Autotest with Docker
