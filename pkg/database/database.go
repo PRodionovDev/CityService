@@ -28,7 +28,3 @@ func InitDatabase() error {
     DB.AutoMigrate(&domain.Region{})
     return DB.AutoMigrate(&domain.City{})
 }
-
-func GetDB() *gorm.DB {
-	return DB
-}
