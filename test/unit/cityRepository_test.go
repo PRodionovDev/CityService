@@ -42,7 +42,21 @@ func TestFindCityByID(t *testing.T) {
 }
 
 func TestUpdateCityByID(t *testing.T) {
-    //
+    db, mock := NewMockDB()
+    repos := repository.NewRepositories(db)
+
+    rows := sqlmock.NewRows([]string{"id", "name", "slug", "region_id", "is_capital", "type", "latitude", "longitude", "time_zone", "population"}).
+        AddRow(1, "Mosow", "moscow", 1, true, "Город", "55.751244", "37.618423", "Europe/Moscow", 15000000)
+    mock.ExpectQuery("SELECT * FROM \"cities\" WHERE \"cities\".\"id\" = $1 ORDER BY \"cities\".\"id\" LIMIT $2").WillReturnRows(rows)
+
+    mock.ExpectBegin()
+    mock.ExpectExec("UPDATE \"cities\" SET \"name\"=$1 WHERE \"id\" = $2").WillReturnResult(sqlmock.NewResult(1, 1))
+    mock.ExpectCommit()
+
+    city := repos.Cities.UpdateCity(1, "Moscow", "moscow", 1, true, "Город", 55.75, 37.61, "Europe/Moscow", 15000000)
+    if city.Name != "Moscow" {
+        t.Fatalf("Failed to update city: %v", city)
+    }
 }
 
 func TestDeleteCityByID(t *testing.T) {
