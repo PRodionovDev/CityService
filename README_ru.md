@@ -133,4 +133,13 @@ curl -X POST http://localhost:8080/sync -H "Content-Type: application/json" -H "
 
 ## Автотесты
 
-В РАЗРАБОТКЕ
+Автотесты в проекте представлены юнит-тестами и запускаются следующим образом:
+
+1. Локально:
+```shell
+go test ./test/unit
+```
+2. В docker-контейнере с помощью make:
+```shell
+make tests
+```

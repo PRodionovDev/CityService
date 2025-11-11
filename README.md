@@ -133,4 +133,13 @@ curl -X POST http://localhost:8080/sync -H "Content-Type: application/json" -H "
 
 ## Test
 
-IN PROGRESS
+Automated tests in the project are represented by unit tests and are run as follows:
+
+1. Locally:
+```shell
+go test ./test/unit
+```
+2. In a Docker container using make:
+```shell
+make tests
+```

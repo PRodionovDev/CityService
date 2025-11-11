@@ -6,3 +6,4 @@ up:
 down:
 	docker-compose down --remove-orphans
 tests:
+	docker exec -it city-service-container go test ./test/unit
