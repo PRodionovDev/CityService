@@ -37,6 +37,20 @@ func TestFindRegionByID(t *testing.T) {
     }
 }
 
+func TestCreateRegion(t *testing.T) {
+    db, mock := NewMockDB()
+    repos := repository.NewRepositories(db)
+
+    mock.ExpectBegin()
+    mock.ExpectExec("INSERT INTO \"regions\" (\"name\",\"slug\",\"number\") VALUES ($1) RETURNING \"id\"").WillReturnResult(sqlmock.NewResult(1, 1))
+    mock.ExpectCommit()
+
+    region := repos.Regions.CreateRegion("Moscow", "moscow", 99)
+        if region.Name != "Moscow" {
+            t.Fatalf("Failed to create region: %v", region)
+        }
+}
+
 func TestUpdateRegionByID(t *testing.T) {
     db, mock := NewMockDB()
     repos := repository.NewRepositories(db)

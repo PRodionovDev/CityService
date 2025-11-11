@@ -41,6 +41,20 @@ func TestFindCityByID(t *testing.T) {
     }
 }
 
+func TestCreateCity(t *testing.T) {
+    db, mock := NewMockDB()
+    repos := repository.NewRepositories(db)
+
+    mock.ExpectBegin()
+    mock.ExpectExec("INSERT INTO \"cities\" (\"name\",\"slug\",\"region_id\",\"is_capital\",\"type\",\"latitude\",\"longitude\",\"time_zone\",\"population\") VALUES ($1) RETURNING \"id\"").WillReturnResult(sqlmock.NewResult(1, 1))
+    mock.ExpectCommit()
+
+    city := repos.Cities.CreateCity("Moscow", "moscow", 1, true, "Город", 55.75, 37.61, "Europe/Moscow", 15000000)
+    if city.Name != "Moscow" {
+        t.Fatalf("Failed to create city: %v", city)
+    }
+}
+
 func TestUpdateCityByID(t *testing.T) {
     db, mock := NewMockDB()
     repos := repository.NewRepositories(db)
