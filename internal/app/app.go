@@ -24,6 +24,6 @@ func Run() {
 
 	srv := new(server.Server)
 	if err := srv.Run("8080", handlers.InitRoutes()); err != nil {
-		log.Fatalf("Failed to run http server: %e", err.Error())
+		log.Fatalf("Failed to run http server: %s", err.Error())
 	}
 }
