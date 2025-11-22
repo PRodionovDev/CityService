@@ -2,24 +2,25 @@ package test
 
 import (
 	"log"
+
+	"github.com/DATA-DOG/go-sqlmock"
 	"gorm.io/driver/postgres"
-    "gorm.io/gorm"
-    "github.com/DATA-DOG/go-sqlmock"
+	"gorm.io/gorm"
 )
 
 func NewMockDB() (*gorm.DB, sqlmock.Sqlmock) {
-    db, mock, err := sqlmock.New(sqlmock.QueryMatcherOption(sqlmock.QueryMatcherEqual))
-    if err != nil {
-        log.Fatalf("An error '%s' was not expected when opening a stub database connection", err)
-    }
+	db, mock, err := sqlmock.New(sqlmock.QueryMatcherOption(sqlmock.QueryMatcherEqual))
+	if err != nil {
+		log.Fatalf("An error '%s' was not expected when opening a stub database connection", err)
+	}
 
-    gormDB, err := gorm.Open(postgres.New(postgres.Config{
-        Conn: db,
-    }), &gorm.Config{})
+	gormDB, err := gorm.Open(postgres.New(postgres.Config{
+		Conn: db,
+	}), &gorm.Config{})
 
-    if err != nil {
-        log.Fatalf("An error '%s' was not expected when opening gorm database", err)
-    }
+	if err != nil {
+		log.Fatalf("An error '%s' was not expected when opening gorm database", err)
+	}
 
-    return gormDB, mock
+	return gormDB, mock
 }
